@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tt9_betweener_challenge/views/login_view.dart';
 import 'package:tt9_betweener_challenge/views/main_app_view.dart';
 
+// Done 100%
 class LoadingView extends StatefulWidget {
   static const id = '/loadingView';
   const LoadingView({super.key});

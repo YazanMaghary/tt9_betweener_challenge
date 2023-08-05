@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tt9_betweener_challenge/views/home_view.dart';
+import 'package:tt9_betweener_challenge/views/links_add_view.dart';
 import 'package:tt9_betweener_challenge/views/loading_view.dart';
 import 'package:tt9_betweener_challenge/views/login_view.dart';
 import 'package:tt9_betweener_challenge/views/main_app_view.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         MainAppView.id: (context) => const MainAppView(),
         ProfileView.id: (context) => const ProfileView(),
         ReceiveView.id: (context) => const ReceiveView(),
+        LinkAdd.id: (context) => LinkAdd(),
       },
     );
   }

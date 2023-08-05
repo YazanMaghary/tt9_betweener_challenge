@@ -38,7 +38,6 @@ class _LoginViewState extends State<LoginView> {
         //save user locally
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('user', userToJson(user));
-
         if (mounted) {
           Navigator.pushNamed(context, MainAppView.id);
         }
