@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tt9_betweener_challenge/constants.dart';
-import 'package:tt9_betweener_challenge/controllers/follow_controller.dart';
+import 'package:tt9_betweener_challenge/controllers/auth_controller.dart';
 import 'package:tt9_betweener_challenge/controllers/link_controller.dart';
 import 'package:tt9_betweener_challenge/controllers/user_controller.dart';
-import 'package:tt9_betweener_challenge/views/home_view.dart';
-import 'package:tt9_betweener_challenge/views/links_add_view.dart';
-import 'package:tt9_betweener_challenge/views/profile_view.dart';
-import 'package:tt9_betweener_challenge/views/receive_view.dart';
-import 'package:tt9_betweener_challenge/views/search_profile_view.dart';
-import 'package:tt9_betweener_challenge/views/widgets/custom_floating_nav_bar.dart';
+import 'package:tt9_betweener_challenge/views_features/home/home_view.dart';
+import 'package:tt9_betweener_challenge/views_features/links_add_view.dart';
+import 'package:tt9_betweener_challenge/views_features/auth/login_view.dart';
+import 'package:tt9_betweener_challenge/views_features/profile_view.dart';
+import 'package:tt9_betweener_challenge/views_features/recive/receive_view.dart';
+import 'package:tt9_betweener_challenge/views_features/search_profile_view.dart';
+import 'package:tt9_betweener_challenge/views_features/widgets/custom_floating_nav_bar.dart';
 
 class MainAppView extends StatefulWidget {
   static String id = '/mainAppView';
@@ -50,11 +52,29 @@ class _MainAppViewState extends State<MainAppView> {
                   builder: (context) {
                     return LinkAdd(0);
                   },
-                ));
+                )).then((value) async {
+                  await getLinks(context);
+                });
               },
             )
           : null,
       appBar: AppBar(
+        leading: _currentIndex == 1
+            ? IconButton(
+                onPressed: () async {
+                  await logout();
+                  SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
+                  print(preferences.getString('user'));
+                  if (mounted) {
+                    Navigator.pushReplacementNamed(context, LoginView.id);
+                  }
+                },
+                icon: const Icon(
+                  Icons.logout,
+                  size: 24,
+                ))
+            : const SizedBox(),
         title: _currentIndex == 2
             ? const Text(
                 "Profile",
@@ -143,8 +163,10 @@ class SearchBar extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     Future<List> users;
+
     users = searchUser(context, query);
     // TODO: implement buildSuggestions
+
     return query == ''
         ? const Text(
             'Write to search about user',
@@ -168,13 +190,13 @@ class SearchBar extends SearchDelegate {
                             return ProfileViewSearch(
                               name: snapshot.data?[index]['name'],
                               email: snapshot.data?[index]['email'],
-                              links: snapshot.data?[index]['links'],
+                              links: snapshot.data?[index]['links'] ?? [],
                               idUser: snapshot.data?[index]['id'],
                             );
                           }));
                         },
                         child: Text(
-                          "${snapshot.data?[index]['name']}",
+                          "${snapshot.data?[index]['name'] ?? ''}",
                           style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,

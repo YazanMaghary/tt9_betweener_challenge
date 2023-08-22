@@ -8,11 +8,10 @@ import 'package:tt9_betweener_challenge/models/user.dart';
 
 class ProfileViewSearch extends StatefulWidget {
   static String id = '/ProfileViewSearch';
-  late final String name;
-  late final String email;
-  late final int idUser;
-
-  late final List links;
+  final String name;
+  final String email;
+  final int idUser;
+  final List links;
   ProfileViewSearch(
       {super.key,
       required this.name,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tt9_betweener_challenge/constants.dart';
 import 'package:tt9_betweener_challenge/models/user.dart';
-import 'package:tt9_betweener_challenge/views/login_view.dart';
+import 'package:tt9_betweener_challenge/views_features/auth/login_view.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -89,7 +89,6 @@ Future<List> getFollower(context) async {
 
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body)['followers'];
-
     return data;
   }
 

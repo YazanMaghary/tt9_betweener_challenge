@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tt9_betweener_challenge/views/home_view.dart';
-import 'package:tt9_betweener_challenge/views/links_add_view.dart';
-import 'package:tt9_betweener_challenge/views/loading_view.dart';
-import 'package:tt9_betweener_challenge/views/login_view.dart';
-import 'package:tt9_betweener_challenge/views/main_app_view.dart';
-import 'package:tt9_betweener_challenge/views/profile_view.dart';
-import 'package:tt9_betweener_challenge/views/receive_view.dart';
-import 'package:tt9_betweener_challenge/views/register_view.dart';
-
+import 'package:tt9_betweener_challenge/views_features/home/home_view.dart';
+import 'package:tt9_betweener_challenge/views_features/links_add_view.dart';
+import 'package:tt9_betweener_challenge/views_features/loading/loading_view.dart';
+import 'package:tt9_betweener_challenge/views_features/auth/login_view.dart';
+import 'package:tt9_betweener_challenge/views_features/main_app_view.dart';
+import 'package:tt9_betweener_challenge/views_features/profile_view.dart';
+import 'package:tt9_betweener_challenge/views_features/recive/receive_view.dart';
+import 'package:tt9_betweener_challenge/views_features/auth/register_view.dart';
 import 'constants.dart';
 
 void main() async {

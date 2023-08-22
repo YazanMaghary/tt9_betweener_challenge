@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tt9_betweener_challenge/constants.dart';
 import 'package:tt9_betweener_challenge/controllers/link_controller.dart';
-import 'package:tt9_betweener_challenge/views/main_app_view.dart';
-import 'package:tt9_betweener_challenge/views/profile_view.dart';
-import 'package:tt9_betweener_challenge/views/widgets/custom_text_form_field.dart';
-import 'package:tt9_betweener_challenge/views/widgets/primary_outlined_button_widget.dart';
-import 'package:tt9_betweener_challenge/views/widgets/secondary_button_widget.dart';
+import 'package:tt9_betweener_challenge/views_features/main_app_view.dart';
+import 'package:tt9_betweener_challenge/views_features/widgets/custom_text_form_field.dart';
+import 'package:tt9_betweener_challenge/views_features/widgets/secondary_button_widget.dart';
 
+// ignore: must_be_immutable
 class LinkAdd extends StatefulWidget {
   static String id = '/linkadd';
   List? controller = ['ADD', 'UPDATE'];
@@ -25,9 +24,15 @@ class _LinkAddState extends State<LinkAdd> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController linkController = TextEditingController();
   TextEditingController titleController = TextEditingController();
+  updateUi() async {
+    await getLinks(context);
+    setState(() {});
+  }
+
   @override
   void initState() {
     // TODO: implement initState
+    updateUi();
     super.initState();
   }
 
@@ -55,7 +60,7 @@ class _LinkAddState extends State<LinkAdd> {
                     hint: widget.index == 0 ? 'Snapchat' : null,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please Enter a Link';
+                        return 'Please Enter a title';
                       }
                       widget.valuetitle = value;
                       return null;
@@ -75,6 +80,10 @@ class _LinkAddState extends State<LinkAdd> {
                       if (value == null || value.isEmpty) {
                         return 'Please Enter a Link';
                       }
+                      if (!value.contains('https://')) {
+                        return 'Link must start with https:';
+                      }
+
                       widget.valueLink = value;
                       return null;
                     },
@@ -89,14 +98,13 @@ class _LinkAddState extends State<LinkAdd> {
                           if (widget.index == 0) {
                             addLink(context, titleController.text,
                                 linkController.text);
-                            Navigator.pushNamed(context, MainAppView.id);
+                            Navigator.of(context).pushNamed(MainAppView.id);
                           } else {
                             updateLink(context, widget.idlink!,
                                 widget.valuetitle!, widget.valueLink!);
                             if (mounted) {
                               Navigator.pushNamed(context, MainAppView.id);
                             }
-                            setState(() {});
                           }
                         }
                       },

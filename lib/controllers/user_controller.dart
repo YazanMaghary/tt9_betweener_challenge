@@ -6,7 +6,7 @@ import 'package:tt9_betweener_challenge/constants.dart';
 import '../models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import '../views/login_view.dart';
+import '../views_features/auth/login_view.dart';
 
 Future<User> getLocalUser() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -24,7 +24,7 @@ Future<List> searchUser(context, String name) async {
       body: {'name': body}, headers: {'Authorization': 'Bearer ${user.token}'});
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body);
-
+    print(data['user']);
     return data['user'];
   }
 

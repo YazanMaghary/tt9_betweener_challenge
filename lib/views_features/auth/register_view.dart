@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tt9_betweener_challenge/assets.dart';
 import 'package:tt9_betweener_challenge/controllers/auth_controller.dart';
-import 'package:tt9_betweener_challenge/views/login_view.dart';
-import 'package:tt9_betweener_challenge/views/widgets/custom_text_form_field.dart';
-import 'package:tt9_betweener_challenge/views/widgets/secondary_button_widget.dart';
-
-import '../../views/widgets/google_button_widget.dart';
+import 'package:tt9_betweener_challenge/views_features/auth/login_view.dart';
+import 'package:tt9_betweener_challenge/views_features/widgets/custom_text_form_field.dart';
+import 'package:tt9_betweener_challenge/views_features/widgets/google_button_widget.dart';
+import 'package:tt9_betweener_challenge/views_features/widgets/secondary_button_widget.dart';
 
 class RegisterView extends StatefulWidget {
   static String id = '/registerView';
